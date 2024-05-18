@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
       - name: Checkout
@@ -33,7 +33,7 @@ jobs:
         run: sudo apt-get install libarchive-tools rpm
 
       - name: Release Electron app
-        uses: samuelmeuli/action-electron-builder@v1
-        with:
+        run: npx --no-install electron-builder --linux --publish always --log-level debug
+        env:
           github_token: ${{ secrets.github_token }}
           release: true
