@@ -33,7 +33,7 @@ jobs:
         run: sudo apt-get install libarchive-tools rpm
 
       - name: Release Electron app
-        run: npx --no-install electron-builder --linux --publish always --log-level debug
-        env:
+        uses: samuelmeuli/action-electron-builder@v1
+        with:
           github_token: ${{ secrets.github_token }}
           release: true
