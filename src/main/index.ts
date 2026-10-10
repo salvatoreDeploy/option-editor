@@ -1,24 +1,31 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, nativeTheme } from 'electron'
 import { join, resolve } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import icon from '../../resources/icon.png?asset'
 import { createFileRoute, createURLRoute } from 'electron-router-dom'
+import { resolveWindowIconPath } from './appIcons'
 
 import './ipc'
 import './store'
 import { createTray } from './tray'
-import { createShortcurts } from './shortcurts'
+import { createShortcuts } from './shortcuts'
+import { createExportHandlers } from './export'
+import { createImportHandlers } from './import'
+import { createSettingsHandlers } from './settings'
+import { createAuthHandlers } from './auth'
+import { createActivityHandlers } from './activity'
 
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1120,
-    height: 700,
+    width: 1440,
+    height: 900,
+    minWidth: 960,
+    minHeight: 600,
     show: false,
     autoHideMenuBar: true,
-    backgroundColor: '#17141f',
+    backgroundColor: '#09090B',
     titleBarStyle: 'hiddenInset',
-    ...(process.platform === 'linux' ? { icon } : {}),
+    ...(process.platform === 'linux' ? { icon: resolveWindowIconPath() } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false,
@@ -30,7 +37,23 @@ function createWindow(): void {
 
   createTray(mainWindow)
 
-  createShortcurts(mainWindow)
+  createShortcuts(mainWindow)
+
+  createExportHandlers(mainWindow)
+
+  createImportHandlers(mainWindow)
+
+  createSettingsHandlers(mainWindow)
+
+  createAuthHandlers()
+
+  createActivityHandlers()
+
+  if (process.platform === 'linux') {
+    nativeTheme.on('updated', () => {
+      mainWindow.setIcon(resolveWindowIconPath())
+    })
+  }
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
@@ -77,9 +100,6 @@ app.whenReady().then(() => {
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
-
-  // IPC test
-  ipcMain.on('ping', () => console.log('pong'))
 
   createWindow()
 

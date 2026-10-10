@@ -5,21 +5,51 @@ export const content = ['./src/**/*.tsx']
 export const theme = {
   extend: {
     fontFamily: {
-      sans: 'Roboto, sans-serif',
+      sans: 'Geist, sans-serif',
+      mono: 'Geist Mono, monospace',
+    },
+    borderRadius: {
+      sm: '6px',
+      md: '8px',
+      lg: '12px',
     },
     colors: {
-      rotion: {
-        50: '#ebeaed',
-        100: '#c1bfc7',
-        200: '#a3a0ac',
-        300: '#797486',
-        400: '#5f596e',
-        500: '#37304a',
-        600: '#322c43',
-        700: '#272235',
-        800: '#1e1a29',
-        900: '#17141f',
+      sidebar: 'rgb(var(--sidebar) / <alpha-value>)',
+      background: 'rgb(var(--background) / <alpha-value>)',
+      foreground: 'rgb(var(--foreground) / <alpha-value>)',
+      card: {
+        DEFAULT: 'rgb(var(--card) / <alpha-value>)',
+        foreground: 'rgb(var(--card-foreground) / <alpha-value>)',
       },
+      popover: {
+        DEFAULT: 'rgb(var(--popover) / <alpha-value>)',
+        foreground: 'rgb(var(--popover-foreground) / <alpha-value>)',
+      },
+      primary: {
+        DEFAULT: 'rgb(var(--primary) / <alpha-value>)',
+        foreground: 'rgb(var(--primary-foreground) / <alpha-value>)',
+      },
+      secondary: {
+        DEFAULT: 'rgb(var(--secondary) / <alpha-value>)',
+        foreground: 'rgb(var(--secondary-foreground) / <alpha-value>)',
+      },
+      muted: {
+        DEFAULT: 'rgb(var(--muted) / <alpha-value>)',
+        foreground: 'rgb(var(--muted-foreground) / <alpha-value>)',
+      },
+      accent: {
+        DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
+        foreground: 'rgb(var(--accent-foreground) / <alpha-value>)',
+      },
+      destructive: {
+        DEFAULT: 'rgb(var(--destructive) / <alpha-value>)',
+        foreground: 'rgb(var(--destructive-foreground) / <alpha-value>)',
+      },
+      success: 'rgb(var(--success) / <alpha-value>)',
+      warning: 'rgb(var(--warning) / <alpha-value>)',
+      border: 'rgb(var(--border) / <alpha-value>)',
+      input: 'rgb(var(--input) / <alpha-value>)',
+      ring: 'rgb(var(--ring) / <alpha-value>)',
     },
     keyframes: {
       slideIn: {

@@ -1,5 +1,5 @@
 {
-  "name": "tasknet",
+  "name": "optioneditor",
   "version": "0.0.10",
   "description": "An Electron application with React and TypeScript",
   "main": "./out/main/index.js",
@@ -8,6 +8,7 @@
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
+    "test": "vitest run",
     "start": "electron-vite preview",
     "dev": "electron-vite dev --watch",
     "build": "electron-vite build",
@@ -21,7 +22,10 @@
     "@electron-toolkit/preload": "^3.0.0",
     "@electron-toolkit/utils": "^3.0.0",
     "@farscrl/tiptap-extension-spellchecker": "^1.0.5",
+    "@radix-ui/react-alert-dialog": "^1.1.23",
     "@radix-ui/react-collapsible": "^1.0.3",
+    "@radix-ui/react-dialog": "^1.1.23",
+    "@radix-ui/react-dropdown-menu": "^2.1.24",
     "@tailwindcss/typography": "^0.5.13",
     "@tanstack/react-query": "^5.32.0",
     "@tiptap/extension-code-block-lowlight": "^2.3.2",
@@ -38,9 +42,9 @@
     "electron-store": "^8.2.0",
     "lowlight": "^3.1.0",
     "phosphor-react": "^1.4.1",
-    "react-router-dom": "^6.23.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.23.0"
   },
   "devDependencies": {
     "@electron-toolkit/tsconfig": "^1.0.1",
@@ -55,10 +59,12 @@
     "electron-builder": "^24.9.1",
     "electron-vite": "^2.0.0",
     "eslint": "^8.56.0",
+    "jsdom": "^25.0.1",
     "postcss": "^8.4.38",
     "tailwind-scrollbar": "^3.1.0",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.3.3",
-    "vite": "^5.0.12"
+    "vite": "^5.0.12",
+    "vitest": "^2.1.9"
   }
 }

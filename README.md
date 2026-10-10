@@ -1,4 +1,4 @@
-# Projeto: TaskNet
+# Projeto: OptionEditor
 
 ## Tecnologias: Electron, React, Node, TailwindCss
 

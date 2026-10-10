@@ -1,30 +1,14 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { Plus } from 'phosphor-react'
-import { createDocument } from '../../api/createDocument'
-import { Document } from '~/src/shared/types/ipc'
+import { Plus, UploadSimple } from 'phosphor-react'
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useCreateDocument } from '../../hooks/useCreateDocument'
+import { useImportMarkdown } from '../../hooks/useImportMarkdown'
 
 export function CreatePage() {
-  const queryClient = useQueryClient()
+  const { mutate: createDocumentFn, isPending: isCreatingNewDocument } =
+    useCreateDocument()
 
-  const navigate = useNavigate()
-
-  const { mutateAsync: createDocumentFn, isPending: isCreatingNewDocument } =
-    useMutation({
-      mutationFn: createDocument,
-      onSuccess: (data) => {
-        queryClient.setQueryData<Document[]>(['documents'], (documents) => {
-          if (documents && documents?.length >= 0) {
-            return [...documents, data]
-          } else {
-            return [data]
-          }
-        })
-
-        navigate(`/document/${data.id}`)
-      },
-    })
+  const { mutate: importMarkdownFn, isPending: isImportingMarkdown } =
+    useImportMarkdown()
 
   useEffect(() => {
     function onNewDocument() {
@@ -36,16 +20,27 @@ export function CreatePage() {
     return () => {
       unsubscribe()
     }
-  }, [])
+  }, [createDocumentFn])
 
   return (
-    <button
-      onClick={() => createDocumentFn()}
-      disabled={isCreatingNewDocument}
-      className="flex w-[240px] px-5 items-center text-sm gap-2 absolute bottom-0 left-0 right-0 py-4 border-t border-rotion-600 hover:bg-rotion-700 disabled:opacity-60"
-    >
-      <Plus className="h-4 w-4" />
-      Criar novo documento
-    </button>
+    <div className="flex flex-col gap-2">
+      <button
+        onClick={() => createDocumentFn()}
+        disabled={isCreatingNewDocument}
+        className="flex items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90 disabled:opacity-60"
+      >
+        <Plus className="h-4 w-4" />
+        Novo documento
+      </button>
+
+      <button
+        onClick={() => importMarkdownFn()}
+        disabled={isImportingMarkdown}
+        className="flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground disabled:opacity-60"
+      >
+        <UploadSimple className="h-4 w-4" />
+        Importar Markdown
+      </button>
+    </div>
   )
 }

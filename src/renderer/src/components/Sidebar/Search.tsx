@@ -1,25 +1,16 @@
 import { MagnifyingGlass } from 'phosphor-react'
-import { SearchBar } from '../SearchBar'
-import { useState } from 'react'
+import { useSearchDialog } from '../../contexts/SearchDialogContext'
 
 export function Search() {
-  const [isSearchBarOpen, setIsSearchBarOpen] = useState(false)
-
-  function handleOpenChange(isOpen: boolean) {
-    setIsSearchBarOpen(isOpen)
-  }
+  const { open } = useSearchDialog()
 
   return (
-    <>
-      <button
-        onClick={() => handleOpenChange(true)}
-        className="flex mx-5 items-center gap-2 text-rotion-100 text-sm hover:text-rotion-50"
-      >
-        <MagnifyingGlass className="w-5 h-5" />
-        Busca rápida
-      </button>
-
-      <SearchBar open={isSearchBarOpen} onOpenChange={handleOpenChange} />
-    </>
+    <button
+      onClick={open}
+      className="flex items-center gap-2.5 rounded-md border border-input bg-background px-3.5 py-2.5 text-sm text-muted-foreground hover:border-ring"
+    >
+      <MagnifyingGlass className="h-4 w-4 flex-shrink-0" />
+      <span className="flex-1 text-left">Buscar documentos...</span>
+    </button>
   )
 }

@@ -7,7 +7,7 @@ interface SectionTitleProps {
 export function SectionTitle(props: SectionTitleProps) {
   return (
     <div
-      className="text-rotion-300 mx-3 uppercase text-xs font-semibold"
+      className="px-1 text-[11px] font-bold text-muted-foreground"
       {...props}
     />
   )

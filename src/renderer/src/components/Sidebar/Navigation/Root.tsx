@@ -1,9 +1,11 @@
+import clsx from 'clsx'
 import { ReactNode } from 'react'
 
 interface RootProps {
   children: ReactNode
+  className?: string
 }
 
-export function Root(props: RootProps) {
-  return <nav className="flex mx-2 flex-col gap-8 text-rotion-100" {...props} />
+export function Root({ className, ...props }: RootProps) {
+  return <nav className={clsx('flex flex-col gap-6', className)} {...props} />
 }
